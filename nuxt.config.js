@@ -1,3 +1,7 @@
+require('dotenv').config();
+const {X_API_KEY} = process.env;
+const {URL} = process.env;
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -47,5 +51,11 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+  },
+
+  // envファイルの定義
+  env: {
+    X_API_KEY,
+    URL
   }
 }
