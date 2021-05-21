@@ -10,15 +10,20 @@
 
 <script>
 import axios from 'axios'
+
 export default {
-  async asyncData() {
+  async asyncData($config) {
     const { data } = await axios.get(
-      // your-service-id部分は自分のサービスidに置き換えてください
-      process.env.URL,
+      `${$config.MicroCmsApiUrl}`,
       {
-        // your-api-key部分は自分のapi-keyに置き換えてください
-        headers: { 'X-API-KEY':  process.env.X_API_KEY }
+        headers: { 'X-API-KEY': $config.MicroCmsApiKey },
       }
+      //       // your-service-id部分は自分のサービスidに置き換えてください
+      // process.env.URL,
+      // {
+      //   // your-api-key部分は自分のapi-keyに置き換えてください
+      //   headers: { 'X-API-KEY':  process.env.X_API_KEY }
+      // }
     )
     return data
   }

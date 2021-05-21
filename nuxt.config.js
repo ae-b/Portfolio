@@ -1,8 +1,39 @@
 require('dotenv').config();
-const {X_API_KEY} = process.env;
-const {URL} = process.env;
+// const {MICROCMS_API_URL,MICROCMS_API_KEY} = process.env;
 
 export default {
+
+  // 環境変数設定
+  privateRuntimeConfig: {
+    MicroCmsApiKey: process.env.MICROCMS_API_URL,
+    MicroCmsApiUrl: process.env.MICROCMS_API_KEY
+  },
+  publicRuntimeConfig: {
+  },
+
+  // 動的ルーティング出力設定
+  generate: {
+    async routes() {
+      const pages = await axios
+        .get(process.env.MICROCMS_API_URL, {
+          headers: { 'X-API-KEY': process.env.MICROCMS_API_KEY }
+        })
+        .then((res) =>
+          res.data.contents.map((content) => ({
+            route: `/${content.id}`,
+            payload: content
+          }))
+        )
+      return pages
+    }
+  },
+
+  // // envファイルの定義
+  // env: {
+  //   X_API_KEY,
+  //   URL
+  // }
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -51,11 +82,5 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
-  },
-
-  // envファイルの定義
-  env: {
-    X_API_KEY,
-    URL
   }
 }
