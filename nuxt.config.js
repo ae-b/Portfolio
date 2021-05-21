@@ -11,22 +11,22 @@ export default {
   publicRuntimeConfig: {
   },
 
-  // 動的ルーティング出力設定
-  generate: {
-    async routes() {
-      const pages = await axios
-        .get(process.env.MICROCMS_API_URL, {
-          headers: { 'X-API-KEY': process.env.MICROCMS_API_KEY }
-        })
-        .then((res) =>
-          res.data.contents.map((content) => ({
-            route: `/${content.id}`,
-            payload: content
-          }))
-        )
-      return pages
-    }
-  },
+  // // 動的ルーティング出力設定
+  // generate: {
+  //   async routes() {
+  //     const pages = await axios
+  //       .get(process.env.MICROCMS_API_URL, {
+  //         headers: { 'X-API-KEY': process.env.MICROCMS_API_KEY }
+  //       })
+  //       .then((res) =>
+  //         res.data.contents.map((content) => ({
+  //           route: `/${content.id}`,
+  //           payload: content
+  //         }))
+  //       )
+  //     return pages
+  //   }
+  // },
 
   // // envファイルの定義
   // env: {
